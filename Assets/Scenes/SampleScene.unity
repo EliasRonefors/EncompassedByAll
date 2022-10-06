@@ -2476,14 +2476,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 11.5, y: 9}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 11.5, y: 9}
   m_EdgeRadius: 0
 --- !u!212 &2094286274
 SpriteRenderer:
@@ -2526,7 +2526,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8dc34bac43ac3ea40a99a4c92d12bec8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2544,15 +2544,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094286272}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.88, y: 1.43, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.009965846, w: -0.9999504}
+  m_LocalPosition: {x: 1.9419, y: 1.5023, z: 0}
+  m_LocalScale: {x: 0.11839932, y: 0.11839932, z: 0.11839932}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2107441812225481802}
   m_Father: {fileID: 0}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.142}
 --- !u!114 &2094286276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2566,7 +2566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskName: Brew Tea
-  interactSprite: {fileID: -212897574, guid: 8ddba8561e7cd454fae3b2079a9047bb, type: 3}
+  interactSprite: {fileID: 21300000, guid: df12da1fdb46bfb42ba3df1b19aae795, type: 3}
   gamePanel: {fileID: 2107441812225481806}
 --- !u!1 &2116014858
 GameObject:
