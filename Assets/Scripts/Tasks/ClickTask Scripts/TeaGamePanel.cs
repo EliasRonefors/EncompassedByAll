@@ -18,7 +18,19 @@ public class TeaGamePanel : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI tempText;
 
-    private float tempIncreaseSpeed = 10;
+    [SerializeField]
+    Animator animator;
+
+    [SerializeField]
+    Sprite[] buttonSprites;
+
+    [SerializeField]
+    Image teaCupImage;
+
+    [SerializeField]
+    Sprite bagInTeaSprite;
+
+    private float tempIncreaseSpeed = 13;
     private float temperature;
     private bool teaIsBrewing;
 
@@ -32,6 +44,7 @@ public class TeaGamePanel : MonoBehaviour
 
     private void ResetToDefault() //Resets stuff to default stuff
     {
+        startButton.image.sprite = buttonSprites[0];
         temperature = 12;
         teaIsBrewing = false;
         tempSlider.value = temperature;
@@ -40,14 +53,14 @@ public class TeaGamePanel : MonoBehaviour
 
     void StartButtonPressed()
     {
-        if (teaIsBrewing == true)
+        if (teaIsBrewing == true) //If tea is already brewing
         {
-            if (temperature > 95 && temperature < 105) //Player finish heating the water
+            startButton.image.sprite = buttonSprites[0];
+            if (temperature > 95 && temperature < 115) //Player finish heating the water
             {
                 teaIsBrewing = false;
-                ownerTask.SetAsResolved();
 
-                Invoke("Hide", 1);
+                animator.SetTrigger("Slide");
             }
             else //Player lose
             {
@@ -55,10 +68,19 @@ public class TeaGamePanel : MonoBehaviour
                 Invoke("Hide", 0);
             }
         }
-        else
+        else //If player starts brewing the tea
         {
+            startButton.image.sprite = buttonSprites[1];
             teaIsBrewing = true;
         }
+    }
+
+    void TeaBagInCup()
+    {
+        teaCupImage.sprite = bagInTeaSprite;
+        ownerTask.SetAsResolved();
+        
+        Invoke("Hide", 1);
     }
 
     private void Update()
