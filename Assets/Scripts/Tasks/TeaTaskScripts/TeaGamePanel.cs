@@ -33,7 +33,6 @@ public class TeaGamePanel : MonoBehaviour
     private float tempIncreaseSpeed = 13;
     private float temperature;
     private bool teaIsBrewing;
-    private bool teaIsFinished = false;
 
     private GameObject lastFirstSelectedGameObject;
 
@@ -60,7 +59,6 @@ public class TeaGamePanel : MonoBehaviour
             if (temperature > 95 && temperature < 115) //Player finish heating the water
             {
                 teaIsBrewing = false;
-                teaIsFinished = true;
                 animator.SetTrigger("Slide");
             }
             else //Player lose
@@ -86,23 +84,17 @@ public class TeaGamePanel : MonoBehaviour
 
     private void Update()
     {
-        if (teaIsFinished)
-        {
-            AnimatorStateInfo animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if (animStateInfo.length > 1 && animStateInfo.normalizedTime > animStateInfo.length)
-            {
-                Debug.Log(animStateInfo.length);
-                animator.enabled = false;
-                teaIsFinished = false;
-            }
-        }
-
         if (teaIsBrewing)
         {
             temperature += tempIncreaseSpeed * Time.deltaTime;
             tempSlider.value = temperature;
             tempText.text = ((int)temperature).ToString() + " C°";
         }
+    }
+
+    public void TeaBrewAnimFinished()
+    {
+        animator.enabled = false;
     }
 
 
