@@ -10,6 +10,10 @@ public class DragBag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     [SerializeField] private RectTransform maskRect;
     [SerializeField] private RectTransform backgroundRect;
     [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private RectTransform teaMug;
+
+    [SerializeField] private TeaGamePanel gamePanel;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         //Debug.Log("OnBeginDrag");
@@ -43,8 +47,9 @@ public class DragBag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         canvasGroup.blocksRaycasts = true;
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        //Debug.Log("OnPointerDown");
+        if (rectTransform.rect.Overlaps(teaMug.rect)) //If teabag overlaps with tea mug
+        {
+            gamePanel.TeaBagInCup();
+        }
     }
 }
