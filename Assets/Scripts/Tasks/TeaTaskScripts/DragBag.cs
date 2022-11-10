@@ -23,16 +23,23 @@ public class DragBag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 plannedRectPos = rectTransform.anchoredPosition;
+        Vector2 plannedRectPos = rectTransform.anchoredPosition + eventData.delta / canvas.scaleFactor;
 
-        plannedRectPos = rectTransform.anchoredPosition + eventData.delta / canvas.scaleFactor;
+        float xLow = (Screen.width / 2) - (maskRect.sizeDelta.x / 2);
+        float yLow = (Screen.height / 2) - (maskRect.sizeDelta.y / 2);
 
-        if (Mathf.Abs(plannedRectPos.x) >= maskRect.sizeDelta.x / 2 - backgroundRect.anchoredPosition.x/2 - rectTransform.sizeDelta.x / 2)
+        float xHigh = (Screen.width / 2) + (maskRect.sizeDelta.x / 2);
+        float yHigh = (Screen.height / 2) + (maskRect.sizeDelta.y / 2);
+
+        Debug.LogFormat("X: {0}, Y: {1}", xLow, yLow);
+        Debug.LogFormat("World positin tbag {0}", rectTransform.position);
+
+        if (xLow + rectTransform.sizeDelta.x/2 > rectTransform.position.x || xHigh - rectTransform.sizeDelta.x/2 < rectTransform.position.x)
         {
             plannedRectPos.x = rectTransform.anchoredPosition.x;
         }
 
-        if (Mathf.Abs(plannedRectPos.y) >= maskRect.sizeDelta.y / 2 - rectTransform.sizeDelta.y / 2)
+        if (yLow + rectTransform.sizeDelta.y/2 > rectTransform.position.y || yHigh - rectTransform.sizeDelta.y/2 < rectTransform.position.y)
         {
             plannedRectPos.y = rectTransform.anchoredPosition.y;
         }
@@ -45,7 +52,6 @@ public class DragBag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         //Debug.Log("OnEndDrag");
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
-    }
 
         if (rectTransform.rect.Overlaps(teaMug.rect)) //If teabag overlaps with tea mug
         {
