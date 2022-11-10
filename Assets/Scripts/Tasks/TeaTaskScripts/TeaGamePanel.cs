@@ -6,8 +6,7 @@ using TMPro;
 
 public class TeaGamePanel : MonoBehaviour
 {
-    [SerializeField]
-    Task ownerTask;
+    public Task ownerTask;
 
     [SerializeField]
     Button startButton;
@@ -29,6 +28,9 @@ public class TeaGamePanel : MonoBehaviour
 
     [SerializeField]
     Sprite bagInTeaSprite;
+
+    [SerializeField]
+    GameObject teaBag;
 
     private float tempIncreaseSpeed = 13;
     private float temperature;
@@ -74,12 +76,13 @@ public class TeaGamePanel : MonoBehaviour
         }
     }
 
-    void TeaBagInCup()
+    public void TeaBagInCup()
     {
+        teaBag.SetActive(false);
         teaCupImage.sprite = bagInTeaSprite;
         ownerTask.SetAsResolved();
-        
-        Invoke("Hide", 1);
+
+        Invoke("Hide", 2);
     }
 
     private void Update()
