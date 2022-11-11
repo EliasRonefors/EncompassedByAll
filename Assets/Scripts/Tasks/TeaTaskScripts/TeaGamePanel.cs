@@ -89,9 +89,18 @@ public class TeaGamePanel : MonoBehaviour
     {
         if (teaIsBrewing)
         {
-            temperature += tempIncreaseSpeed * Time.deltaTime;
-            tempSlider.value = temperature;
-            tempText.text = ((int)temperature).ToString() + " C°";
+            if(temperature !< tempSlider.maxValue)
+            {
+                temperature += tempIncreaseSpeed * Time.deltaTime;
+                tempSlider.value = temperature;
+                tempText.text = ((int)temperature).ToString() + " C°";
+            }
+            else
+            {
+                //You fail.
+                ResetToDefault();
+                Invoke("Hide", 0);
+            }
         }
     }
 
