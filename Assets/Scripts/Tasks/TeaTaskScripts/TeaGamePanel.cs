@@ -58,7 +58,7 @@ public class TeaGamePanel : MonoBehaviour
         if (teaIsBrewing == true) //If tea is already brewing
         {
             startButton.image.sprite = buttonSprites[0];
-            if (temperature > 95 && temperature < 115) //Player finish heating the water
+            if (temperature > 90 && temperature < 110) //Player finish heating the water
             {
                 teaIsBrewing = false;
                 animator.SetTrigger("Slide");
