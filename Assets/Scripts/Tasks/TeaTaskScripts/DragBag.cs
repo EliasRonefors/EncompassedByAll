@@ -53,7 +53,7 @@ public class DragBag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
 
-        if (rectTransform.rect.Overlaps(teaMug.rect)) //If teabag overlaps with tea mug
+        if (rectTransform.rect.Overlaps(teaMug.rect, true)) //If teabag overlaps with tea mug
         {
             gamePanel.TeaBagInCup();
         }
