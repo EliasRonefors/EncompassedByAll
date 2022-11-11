@@ -30,9 +30,6 @@ public class DragBag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         float xHigh = (Screen.width / 2) + (maskRect.sizeDelta.x / 2);
         float yHigh = (Screen.height / 2) + (maskRect.sizeDelta.y / 2);
 
-        Debug.LogFormat("X: {0}, Y: {1}", xLow, yLow);
-        Debug.LogFormat("World positin tbag {0}", rectTransform.position);
-
         if (xLow + rectTransform.sizeDelta.x/2 > rectTransform.position.x || xHigh - rectTransform.sizeDelta.x/2 < rectTransform.position.x)
         {
             plannedRectPos.x = rectTransform.anchoredPosition.x;
