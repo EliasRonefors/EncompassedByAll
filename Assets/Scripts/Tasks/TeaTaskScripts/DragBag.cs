@@ -22,7 +22,7 @@ public class DragBag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 plannedRectPos = rectTransform.anchoredPosition + eventData.delta / canvas.scaleFactor;
+        Vector2 plannedRectPos = (Vector2)rectTransform.position + eventData.delta / canvas.scaleFactor;
 
         float xLow = (Screen.width / 2) - (maskRect.sizeDelta.x / 2);
         float yLow = (Screen.height / 2) - (maskRect.sizeDelta.y / 2);
@@ -30,17 +30,25 @@ public class DragBag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         float xHigh = (Screen.width / 2) + (maskRect.sizeDelta.x / 2);
         float yHigh = (Screen.height / 2) + (maskRect.sizeDelta.y / 2);
 
-        if (xLow + rectTransform.sizeDelta.x/2 > rectTransform.position.x || xHigh - rectTransform.sizeDelta.x/2 < rectTransform.position.x)
+        if (xLow + rectTransform.sizeDelta.x / 2 >= rectTransform.position.x) //If plannedRectPos surpasses the left border
         {
-            plannedRectPos.x = rectTransform.anchoredPosition.x;
+            plannedRectPos.x = xLow + rectTransform.sizeDelta.x / 2;
+        }
+        else if (xHigh - rectTransform.sizeDelta.x / 2 <= rectTransform.position.x) //If plannedRectPos surpasses the right border
+        {
+            plannedRectPos.x = xHigh - rectTransform.sizeDelta.x / 2;
         }
 
-        if (yLow + rectTransform.sizeDelta.y/2 > rectTransform.position.y || yHigh - rectTransform.sizeDelta.y/2 < rectTransform.position.y)
+        if (yLow + rectTransform.sizeDelta.y / 2 >= rectTransform.position.y) //If plannedRectPos surpasses the bottom border
         {
-            plannedRectPos.y = rectTransform.anchoredPosition.y;
+            plannedRectPos.y = yLow + rectTransform.sizeDelta.y / 2;
+        }
+        else if (yHigh - rectTransform.sizeDelta.y / 2 <= rectTransform.position.y) //If plannedRectPos surpasses the top border
+        {
+            plannedRectPos.y = yHigh - rectTransform.sizeDelta.y / 2;
         }
 
-        rectTransform.anchoredPosition = plannedRectPos;
+        rectTransform.position = plannedRectPos;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -48,11 +56,13 @@ public class DragBag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
 
-        if (rectTransform.rect.Overlaps(teaMug.rect, true)) //If teabag overlaps with tea mug
+        if (RectTransformExtensions.GetWorldRect(teaMug).Contains(RectTransformExtensions.GetWorldRect(rectTransform).center)) //If teabag overlaps with tea mug
         {
             gamePanel.TeaBagInCup();
         }
     }
+
+}
 
 public static class RectTransformExtensions //This class is stolen from the web cause I couldn't find a better way to do this
 {
